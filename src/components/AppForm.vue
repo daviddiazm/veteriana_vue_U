@@ -34,13 +34,17 @@
       type: String,
       required: true
     },
+    caracteristicas: {
+      type: String,
+      required: true
+    },
     sintomas: {
       type: String,
       required: true
     },
   })
 
-  const emits = defineEmits(['update:nombre','update:propietario','update:peso','update:fecha-nacimineto','update:color','update:sintomas','guardar-mascota'])
+  const emits = defineEmits(['update:nombre','update:propietario','update:peso','update:fecha-nacimineto','update:color','update:caracteristicas','update:sintomas','guardar-mascota'])
 
   const leerNombre = (e) => {
     nombre.value = e.target.value
@@ -157,7 +161,7 @@
         <label 
           for="peso"
           class=" block text-gray-900 font-bold uppercase">
-          E-mail del propietario
+          Peso de la mascota
         </label>
         <input 
           type="number" 
@@ -173,7 +177,7 @@
         <label 
           for="alta"
           class=" block text-gray-900 font-bold uppercase">
-          Fecha de alta
+          Fecha Nacimiento
         </label>
         <input 
           type="date" 
@@ -198,6 +202,19 @@
           class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
       </div>
       
+
+      <div class="mb-5" >
+        <label 
+          for="caracteristicas"
+          class=" block text-gray-900 font-bold uppercase">
+          caracteristicas de la mascota
+        </label>
+        <textarea 
+          id="caracteristicas"
+          placeholder="caracteristicas de la mascota"
+          @input="$emit('update:caracteristicas', $event.target.value)"
+          class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 "/>
+      </div>
 
       <div class="mb-5" >
         <label 

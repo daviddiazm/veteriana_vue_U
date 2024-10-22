@@ -9,6 +9,9 @@
     }
   })
 
+  
+  
+
 </script>
 
 <template>
@@ -46,6 +49,12 @@
     <p class="font-bold mb-3 text-gray-700 uppercase">Color:
       <span class="font-normal normal-case">
         {{ mascota.mas_Color }}
+      </span>
+    </p>
+
+    <p class="font-bold mb-3 text-gray-700 uppercase">caracteristicas:
+      <span class="font-normal normal-case">
+        {{ mascota.mas_Caracteristicas }}
       </span>
     </p>
 

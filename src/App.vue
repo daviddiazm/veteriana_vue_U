@@ -18,7 +18,8 @@
     mas_Peso : '',
     mas_FechaNacimineto : '',
     mas_Color : '',
-    sintomas : ''
+    mas_Caracteristicas : '',
+    sintomas : '',
   })
 
   watch(mascotas, ()=> {
@@ -69,11 +70,11 @@
         
       }
     }
-    mascota.nombre = ''
-    mascota.propietario = ''
-    mascota.peso = ''
-    mascota.fechaNacimineto = ''
-    mascota.color = ''
+    mascota.mas_Nombre = ''
+    mascota.mas_Peso = ''
+    mascota.mas_FechaNacimineto = ''
+    mascota.mas_Color = ''
+    mascota.mas_Caracteristicas= ''
     mascota.sintomas = ''
     mascota.id = null
   }
@@ -110,6 +111,7 @@
         v-model:peso="mascota.mas_Peso"
         v-model:fecha-nacimineto="mascota.mas_FechaNacimineto"
         v-model:color="mascota.mas_Color"
+        v-model:caracteristicas="mascota.mas_Caracteristicas"
         v-model:sintomas="mascota.sintomas"
         @guardar-mascota="guardarmascota"
       />
