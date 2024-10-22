@@ -19,13 +19,18 @@
     },
     propietario: {
       type: String,
-      required: true
+      required: false
     },
-    email: {
+    peso: {
       type: String,
       required: true
     },
-    alta: {
+    fechaNacimiento: {
+      type: String,
+      required: false
+      // toca cambiarlo a true
+    },
+    color: {
       type: String,
       required: true
     },
@@ -35,7 +40,7 @@
     },
   })
 
-  const emits = defineEmits(['update:nombre','update:propietario','update:email','update:alta','update:sintomas','guardar-paciente'])
+  const emits = defineEmits(['update:nombre','update:propietario','update:peso','update:fecha-nacimineto','update:color','update:sintomas','guardar-mascota'])
 
   const leerNombre = (e) => {
     nombre.value = e.target.value
@@ -48,7 +53,7 @@
       alert.type= "error"
       return
     }
-    emits('guardar-paciente')
+    emits('guardar-mascota')
     alert.msg = 'Se guardo exitosamente'
     alert.type= 'succes' 
 
@@ -150,16 +155,16 @@
 
       <div class="mb-5" >
         <label 
-          for="email"
+          for="peso"
           class=" block text-gray-900 font-bold uppercase">
           E-mail del propietario
         </label>
         <input 
-          type="email" 
-          id="email"
-          placeholder="usuario@email.com"
-          @input="$emit('update:email',$event.target.value)"
-          :value="email"
+          type="number" 
+          id="peso"
+          placeholder="12"
+          @input="$emit('update:peso',$event.target.value)"
+          :value="peso"
           class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
       </div>
       
@@ -173,8 +178,23 @@
         <input 
           type="date" 
           id="alta"
-          @input="$emit('update:alta',$event.target.value)"
-          :value="alta"
+          @input="$emit('update:fecha-nacimineto',$event.target.value)"
+          :value="fechaNacimiento"
+          class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
+      </div>
+
+
+      <div class="mb-5" >
+        <label 
+          for="color"
+          class=" block text-gray-900 font-bold uppercase">
+          Color de la mascota
+        </label>
+        <input 
+          type="text" 
+          id="color"
+          @input="$emit('update:color',$event.target.value)"
+          :value="color"
           class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
       </div>
       
