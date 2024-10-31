@@ -10,7 +10,7 @@
   
   const props = defineProps({
     id: {
-      type: [String, null],
+      type: [Number, null],
       required: true
     },
     nombre: {
@@ -22,13 +22,12 @@
       required: false
     },
     peso: {
-      type: String,
+      type: Number,
       required: true
     },
     fechaNacimiento: {
       type: String,
-      required: false
-      // toca cambiarlo a true
+      required: true
     },
     color: {
       type: String,
@@ -44,7 +43,15 @@
     },
   })
 
-  const emits = defineEmits(['update:nombre','update:propietario','update:peso','update:fecha-nacimineto','update:color','update:caracteristicas','update:sintomas','guardar-mascota'])
+  const emits = defineEmits([
+    'update:nombre',
+    'update:propietario',
+    'update:peso',
+    'update:fecha-nacimiento',
+    'update:color',
+    'update:caracteristicas',
+    'update:sintomas',
+    'guardar-mascota'])
 
   const leerNombre = (e) => {
     nombre.value = e.target.value
@@ -91,40 +98,7 @@
         v-if="alert.msg"
         :alert = "alert"
       />
-      <!-- asi se hacia antes -->
-      <!-- <div class="mb-5">
-        {{ nombre }}
-        <label 
-          for="nombre"
-          class=" block text-gray-900 font-bold uppercase">
-          Nombre de la mascota
-        </label>
-        <input 
-          type="text" 
-          id="nombre"
-          placeholder="Nombre de la mascota"
-          :value="nombre"
-          @input="leerNombre"
-          class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
-      </div> -->
-
-      <!-- ahora se usa v-model y este es v-model para ref -->
-      <!-- <div class="mb-5">
-        {{ nombre }}
-        <label 
-          for="nombre"
-          class=" block text-gray-900 font-bold uppercase">
-          Nombre de la mascota
-        </label>
-        <input 
-          type="text" 
-          id="nombre"
-          placeholder="Nombre de la mascota"
-          v-model="nombre"
-          class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
-      </div> -->
       
-      <!-- ahora se usa v-model y este es v-model para reactive -->
       <div class="mb-5">
         <!-- {{ paciente.nombre }} -->
         <label 
@@ -173,19 +147,20 @@
       </div>
       
 
-      <div class="mb-5" >
+      <div class="mb-5">
         <label 
           for="alta"
           class=" block text-gray-900 font-bold uppercase">
           Fecha Nacimiento
         </label>
         <input 
-          type="date" 
+          type="text"
           id="alta"
-          @input="$emit('update:fecha-nacimineto',$event.target.value)"
+          @input="$emit('update:fecha-nacimiento', $event.target.value)"
           :value="fechaNacimiento"
           class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
       </div>
+
 
 
       <div class="mb-5" >
@@ -213,6 +188,7 @@
           id="caracteristicas"
           placeholder="caracteristicas de la mascota"
           @input="$emit('update:caracteristicas', $event.target.value)"
+          :value="caracteristicas"
           class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 "/>
       </div>
 
@@ -226,7 +202,8 @@
           id="sintomas"
           placeholder="Sintomas de la mascota"
           @input="$emit('update:sintomas', $event.target.value)"
-          class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 "/>
+          class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
+        </textarea>
       </div>
       <input 
         type="submit" 
