@@ -28,11 +28,11 @@
       </span>
     </p>
 
-    <p class="font-bold mb-3 text-gray-700 uppercase">Propietario:
+    <!-- <p class="font-bold mb-3 text-gray-700 uppercase">Propietario:
       <span class="font-normal normal-case">
         {{ mascota.propietario }}
       </span>
-    </p>
+    </p> -->
 
     <p class="font-bold mb-3 text-gray-700 uppercase">Peso:
       <span class="font-normal normal-case">
@@ -58,11 +58,11 @@
       </span>
     </p>
 
-    <p class="font-bold mb-3 text-gray-700 uppercase">Síntomas:
+    <!-- <p class="font-bold mb-3 text-gray-700 uppercase">Síntomas:
       <span class="font-normal normal-case">
         {{ mascota.sintomas }}
       </span>
-    </p>
+    </p> -->
 
     <div class="grid md:grid-cols-2  gap-5 mt-10 ">
       <button 

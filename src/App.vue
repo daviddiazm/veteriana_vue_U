@@ -50,11 +50,23 @@
   }
 
   const guardarmascota = async () => {
+    console.log('hola');
+    
     if( mascota.mas_Id ) {
-      console.log('no deberia de estar aqui');
-      const { mas_Id } = mascota
-      const i = mascotas.value.findIndex(mascota => mascota.mas_Id === mas_Id)
-      mascotas.value[i] = { ... mascota }
+      console.log('Esta editando');
+      try {
+        // MascotasServices.putDataMascotas(mascota.mas_Id, {...mascota, cli_Id: 1, ani_Id: 1})
+        MascotasServices.putDataMascotas(mascota, mascota.mas_Id)
+        
+        await getMascotas()
+      } catch (error) {
+        console.log(error);
+        
+      }
+      
+      // const { mas_Id } = mascota
+      // const i = mascotas.value.findIndex(mascota => mascota.mas_Id === mas_Id)
+      // mascotas.value[i] = { ... mascota }
 
       // otra manera de hacerlo
       // const i = mascotas.value.findIndex(mascotastate => mascotastate.id === mascota.id);
@@ -88,7 +100,14 @@
     Object.assign(mascota, mascotaActualizar)
   }
 
-
+  const eliminarmascota = async (id) => {
+    try {
+      MascotasServices.deleteDataMascotas(id)
+      await getMascotas()
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   //todo lo referente a local storage
   // const obtenermascota = (id) => {
@@ -115,8 +134,21 @@
     <AppHeader/>
 
     <div class="flex flex-col mt-12 md:flex-row">
+      <!-- <AppForm
+        :id="mascota.mas_Id"
+        v-model:nombre="mascota.mas_Nombre"
+        v-model:propietario="mascota.propietario"
+        v-model:peso="mascota.mas_Peso"
+        v-model:fecha-nacimiento="mascota.mas_FechaNacimineto"
+        v-model:color="mascota.mas_Color"
+        v-model:caracteristicas="mascota.mas_Caracteristicas"
+        v-model:sintomas="mascota.sintomas"
+        @guardar-mascota="guardarmascota"
+      /> -->
+
       <AppForm
         :id="mascota.mas_Id"
+        v-model:mascota = "mascota"
         v-model:nombre="mascota.mas_Nombre"
         v-model:propietario="mascota.propietario"
         v-model:peso="mascota.mas_Peso"
@@ -150,11 +182,12 @@
           />
         </div> -->
 
-        <div v-else >
+        <div v-else  class=" h-screen overflow-scroll">
           <Appmascota
             v-for="mascota in mascotas"
             :mascota="mascota"
             @obtener-mascota = 'obtenermascota'
+            @eliminar-mascota="eliminarmascota"
           />
         </div>
       </div>

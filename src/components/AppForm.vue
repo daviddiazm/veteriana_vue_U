@@ -13,6 +13,10 @@
       type: [Number, null],
       required: true
     },
+    mascota: {
+      type: Object,
+      required: false
+    },
     nombre: {
       type: String,
       required: true
@@ -22,7 +26,7 @@
       required: false
     },
     peso: {
-      type: Number,
+      type: [Number, String],
       required: true
     },
     fechaNacimiento: {
@@ -45,13 +49,15 @@
 
   const emits = defineEmits([
     'update:nombre',
+    "update:mascota",
     'update:propietario',
     'update:peso',
     'update:fecha-nacimiento',
     'update:color',
     'update:caracteristicas',
     'update:sintomas',
-    'guardar-mascota'])
+    'guardar-mascota'
+  ])
 
   const leerNombre = (e) => {
     nombre.value = e.target.value
@@ -64,6 +70,17 @@
       alert.type= "error"
       return
     }
+    emits('guardar-mascota')
+    alert.msg = 'Se guardo exitosamente'
+    alert.type= 'succes' 
+
+    setTimeout(() => {
+      alert.msg = ''
+      alert.type= '' 
+    }, 3000);
+  }
+
+  const sinValidar = () => {
     emits('guardar-mascota')
     alert.msg = 'Se guardo exitosamente'
     alert.type= 'succes' 
@@ -92,7 +109,7 @@
     </p>
 
     <form
-      @submit.prevent="validar"
+      @submit.prevent="sinValidar"
       class="bg-white shadow-md py-10 px-5 rounded-lg mt-5">
       <AppAlert 
         v-if="alert.msg"
@@ -115,7 +132,7 @@
           class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
       </div>
 
-      <div class="mb-5" >
+      <!-- <div class="mb-5" >
         <label 
           for="propietario"
           class=" block text-gray-900 font-bold uppercase">
@@ -128,7 +145,7 @@
           @input="$emit('update:propietario', $event.target.value)"
           :value="propietario"
           class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
-      </div>
+      </div> -->
       
 
       <div class="mb-5" >
@@ -147,20 +164,34 @@
       </div>
       
 
-      <div class="mb-5">
-        <label 
-          for="alta"
-          class=" block text-gray-900 font-bold uppercase">
-          Fecha Nacimiento
-        </label>
-        <input 
-          type="text"
-          id="alta"
-          @input="$emit('update:fecha-nacimiento', $event.target.value)"
-          :value="fechaNacimiento"
-          class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
-      </div>
 
+        <div class="mb-5"  v-if="editando">
+          <label 
+            for="alta"
+            class=" block text-gray-900 font-bold uppercase">
+            Fecha Nacimiento
+          </label>
+          <input 
+            type="text"
+            id="alta"
+            @input="$emit('update:fecha-nacimiento', $event.target.value)"
+            :value="mascota.mas_FechaNacimiento"
+            class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
+        </div>
+
+        <div class="mb-5"  v-else>
+          <label 
+            for="alta"
+            class=" block text-gray-900 font-bold uppercase">
+            Fecha Nacimiento
+          </label>
+          <input 
+            type="date"
+            id="alta"
+            @input="$emit('update:fecha-nacimiento', $event.target.value)"
+            :value="fechaNacimiento"
+            class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
+        </div>
 
 
       <div class="mb-5" >
@@ -192,7 +223,7 @@
           class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 "/>
       </div>
 
-      <div class="mb-5" >
+      <!-- <div class="mb-5" >
         <label 
           for="sintomas"
           class=" block text-gray-900 font-bold uppercase">
@@ -204,7 +235,8 @@
           @input="$emit('update:sintomas', $event.target.value)"
           class=" py-2 px-2 rounded-md w-full mt-2 border-2 placeholder:to-gray-800 ">
         </textarea>
-      </div>
+      </div> -->
+
       <input 
         type="submit" 
         :value="[ editando ? 'Editar paciente' : 'Registar paciente']"
