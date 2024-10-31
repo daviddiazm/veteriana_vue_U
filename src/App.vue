@@ -24,6 +24,7 @@
 
   watch(mascotas, ()=> {
     // guardarmascotasLocalStorage()
+    getMascotas()
   },{
     deep: true
   })
@@ -49,10 +50,10 @@
   }
 
   const guardarmascota = async () => {
-    if( mascota.id ) {
+    if( mascota.mas_Id ) {
       console.log('no deberia de estar aqui');
-      const { id } = mascota
-      const i = mascotas.value.findIndex(mascota => mascota.id === id)
+      const { mas_Id } = mascota
+      const i = mascotas.value.findIndex(mascota => mascota.mas_Id === mas_Id)
       mascotas.value[i] = { ... mascota }
 
       // otra manera de hacerlo
@@ -65,6 +66,7 @@
       try {
         console.log('hola desde el try',{ ...mascota, mas_Id: 23 });
         MascotasServices.postDataMascotas({ ...mascota, mas_Id: 23 })
+
       } catch (error) {
         console.log(error);
         
@@ -78,6 +80,15 @@
     mascota.sintomas = ''
     mascota.id = null
   }
+
+  const obtenermascota = (id) => {
+    const indicemascota = mascotas.value.findIndex(mascota => mascota.mas_Id === id)
+    const mascotaActualizar = mascotas.value[indicemascota]
+    console.log({indicemascota, mascotaActualizar});
+    Object.assign(mascota, mascotaActualizar)
+  }
+
+
 
   //todo lo referente a local storage
   // const obtenermascota = (id) => {
@@ -109,7 +120,7 @@
         v-model:nombre="mascota.mas_Nombre"
         v-model:propietario="mascota.propietario"
         v-model:peso="mascota.mas_Peso"
-        v-model:fecha-nacimineto="mascota.mas_FechaNacimineto"
+        v-model:fecha-nacimiento="mascota.mas_FechaNacimineto"
         v-model:color="mascota.mas_Color"
         v-model:caracteristicas="mascota.mas_Caracteristicas"
         v-model:sintomas="mascota.sintomas"
@@ -143,6 +154,7 @@
           <Appmascota
             v-for="mascota in mascotas"
             :mascota="mascota"
+            @obtener-mascota = 'obtenermascota'
           />
         </div>
       </div>
