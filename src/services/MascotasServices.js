@@ -11,6 +11,15 @@ export default {
   },
 
   postDataMascotas(data) {
-    api.post(`/mascotas`,data)
-  }
+    api.post(`/mascotas`, data)
+  },
+
+  putDataMascotas(data, id) {
+    api.put(`/mascotas/${id}`, data)
+  },
+
+  deleteDataMascotas(data, id) {
+    api.delete(`/mascotas/${id}`, data)
+  },
+  
 }
