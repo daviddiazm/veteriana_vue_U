@@ -16,7 +16,7 @@
     mas_Nombre : '',
     // propietario : '',
     mas_Peso : '',
-    mas_FechaNacimineto : '',
+    mas_FechaNacimiento : '',
     mas_Color : '',
     mas_Caracteristicas : '',
     sintomas : '',
@@ -86,7 +86,7 @@
     }
     mascota.mas_Nombre = ''
     mascota.mas_Peso = ''
-    mascota.mas_FechaNacimineto = ''
+    mascota.mas_FechaNacimiento = ''
     mascota.mas_Color = ''
     mascota.mas_Caracteristicas= ''
     mascota.sintomas = ''
@@ -139,7 +139,7 @@
         v-model:nombre="mascota.mas_Nombre"
         v-model:propietario="mascota.propietario"
         v-model:peso="mascota.mas_Peso"
-        v-model:fecha-nacimiento="mascota.mas_FechaNacimineto"
+        v-model:fecha-nacimiento="mascota.mas_FechaNacimento"
         v-model:color="mascota.mas_Color"
         v-model:caracteristicas="mascota.mas_Caracteristicas"
         v-model:sintomas="mascota.sintomas"
@@ -152,7 +152,7 @@
         v-model:nombre="mascota.mas_Nombre"
         v-model:propietario="mascota.propietario"
         v-model:peso="mascota.mas_Peso"
-        v-model:fecha-nacimiento="mascota.mas_FechaNacimineto"
+        v-model:fecha-nacimiento="mascota.mas_FechaNacimiento"
         v-model:color="mascota.mas_Color"
         v-model:caracteristicas="mascota.mas_Caracteristicas"
         v-model:sintomas="mascota.sintomas"
